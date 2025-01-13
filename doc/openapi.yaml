@@ -1,0 +1,676 @@
+openapi: 3.0.3
+info:
+  title: Sample API
+  description: Sample Description
+  version: 1.0.0
+
+tags:
+  - name: SampleService
+
+paths:
+  /api/v1/sample-user/create:
+    post:
+      summary: サンプルユーザー作成API
+      description: サンプルユーザー作成API 概要
+      operationId: SampleService_CreateSampleUser
+      tags:
+        - SampleService
+      security:
+        - bearer: []
+      parameters:
+        - name: firstName
+          in: query
+          schema:
+            type: string
+        - name: lastName
+          in: query
+          schema:
+            type: string
+        - name: firstNameKana
+          in: query
+          schema:
+            type: string
+        - name: lastNameKana
+          in: query
+          schema:
+            type: string
+        - name: emailAddress
+          in: query
+          schema:
+            type: string
+        - name: tel
+          in: query
+          schema:
+            type: string
+        - name: birthDate
+          in: query
+          schema:
+            type: string
+            format: date-time
+        - name: postalCode
+          in: query
+          schema:
+            type: string
+        - name: prefecture
+          in: query
+          description: |
+            - PREFECTURE_UNSPECIFIED: 未指定
+            - PREFECTURE_HOKKAIDO: 北海道
+            - PREFECTURE_AOMORI: 青森県
+            - PREFECTURE_IWATE: 岩手県
+            - PREFECTURE_MIYAGI: 宮城県
+            - PREFECTURE_AKITA: 秋田県
+            - PREFECTURE_YAMAGATA: 山形県
+            - PREFECTURE_FUKUSHIMA: 福島県
+            - PREFECTURE_IBARAKI: 茨城県
+            - PREFECTURE_TOCHIGI: 栃木県
+            - PREFECTURE_GUNMA: 群馬県
+            - PREFECTURE_SAITAMA: 埼玉県
+            - PREFECTURE_CHIBA: 千葉県
+            - PREFECTURE_TOKYO: 東京都
+            - PREFECTURE_KANAGAWA: 神奈川県
+            - PREFECTURE_NIIGATA: 新潟県
+            - PREFECTURE_TOYAMA: 富山県
+            - PREFECTURE_ISHIKAWA: 石川県
+            - PREFECTURE_FUKUI: 福井県
+            - PREFECTURE_YAMANASHI: 山梨県
+            - PREFECTURE_NAGANO: 長野県
+            - PREFECTURE_GIFU: 岐阜県
+            - PREFECTURE_SHIZUOKA: 静岡県
+            - PREFECTURE_AICHI: 愛知県
+            - PREFECTURE_MIE: 三重県
+            - PREFECTURE_SHIGA: 滋賀県
+            - PREFECTURE_KYOTO: 京都府
+            - PREFECTURE_OSAKA: 大阪府
+            - PREFECTURE_HYOGO: 兵庫県
+            - PREFECTURE_NARA: 奈良県
+            - PREFECTURE_WAKAYAMA: 和歌山県
+            - PREFECTURE_TOTTORI: 鳥取県
+            - PREFECTURE_SHIMANE: 島根県
+            - PREFECTURE_OKAYAMA: 岡山県
+            - PREFECTURE_HIROSHIMA: 広島県
+            - PREFECTURE_YAMAGUCHI: 山口県
+            - PREFECTURE_TOKUSHIMA: 徳島県
+            - PREFECTURE_KAGAWA: 香川県
+            - PREFECTURE_EHIME: 愛媛県
+            - PREFECTURE_KOCHI: 高知県
+            - PREFECTURE_FUKUOKA: 福岡県
+            - PREFECTURE_SAGA: 佐賀県
+            - PREFECTURE_NAGASAKI: 長崎県
+            - PREFECTURE_KUMAMOTO: 熊本県
+            - PREFECTURE_OITA: 大分県
+            - PREFECTURE_MIYAZAKI: 宮崎県
+            - PREFECTURE_KAGOSHIMA: 鹿児島県
+            - PREFECTURE_OKINAWA: 沖縄
+          schema:
+            type: string
+            enum:
+              - PREFECTURE_UNSPECIFIED
+              - PREFECTURE_HOKKAIDO
+              - PREFECTURE_AOMORI
+              - PREFECTURE_IWATE
+              - PREFECTURE_MIYAGI
+              - PREFECTURE_AKITA
+              - PREFECTURE_YAMAGATA
+              - PREFECTURE_FUKUSHIMA
+              - PREFECTURE_IBARAKI
+              - PREFECTURE_TOCHIGI
+              - PREFECTURE_GUNMA
+              - PREFECTURE_SAITAMA
+              - PREFECTURE_CHIBA
+              - PREFECTURE_TOKYO
+              - PREFECTURE_KANAGAWA
+              - PREFECTURE_NIIGATA
+              - PREFECTURE_TOYAMA
+              - PREFECTURE_ISHIKAWA
+              - PREFECTURE_FUKUI
+              - PREFECTURE_YAMANASHI
+              - PREFECTURE_NAGANO
+              - PREFECTURE_GIFU
+              - PREFECTURE_SHIZUOKA
+              - PREFECTURE_AICHI
+              - PREFECTURE_MIE
+              - PREFECTURE_SHIGA
+              - PREFECTURE_KYOTO
+              - PREFECTURE_OSAKA
+              - PREFECTURE_HYOGO
+              - PREFECTURE_NARA
+              - PREFECTURE_WAKAYAMA
+              - PREFECTURE_TOTTORI
+              - PREFECTURE_SHIMANE
+              - PREFECTURE_OKAYAMA
+              - PREFECTURE_HIROSHIMA
+              - PREFECTURE_YAMAGUCHI
+              - PREFECTURE_TOKUSHIMA
+              - PREFECTURE_KAGAWA
+              - PREFECTURE_EHIME
+              - PREFECTURE_KOCHI
+              - PREFECTURE_FUKUOKA
+              - PREFECTURE_SAGA
+              - PREFECTURE_NAGASAKI
+              - PREFECTURE_KUMAMOTO
+              - PREFECTURE_OITA
+              - PREFECTURE_MIYAZAKI
+              - PREFECTURE_KAGOSHIMA
+              - PREFECTURE_OKINAWA
+            default: PREFECTURE_UNSPECIFIED
+        - name: city
+          in: query
+          schema:
+            type: string
+        - name: streetAndNumber
+          in: query
+          schema:
+            type: string
+        - name: buildingAndRoom
+          in: query
+          schema:
+            type: string
+      responses:
+        "200":
+          description: A successful response.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/v1CreateSampleUserResponse"
+              examples:
+                default:
+                  value: {}
+        "500":
+          description: ""
+          content:
+            application/json:
+              schema: {}
+              examples:
+                default:
+                  value:
+                    code: internal
+                    message: エラーが発生しました。再試行しても解消しない場合は、「お問合せ」からご連絡ください。
+
+  /api/v1/sample-user/delete:
+    post:
+      summary: サンプルユーザー削除API
+      description: サンプルユーザー削除API 概要
+      operationId: SampleService_DeleteSampleUser
+      tags:
+        - SampleService
+      security:
+        - bearer: []
+      parameters:
+        - name: sampleUserId
+          in: query
+          description: サンプルなので、UserIDはBodyに含める
+          schema:
+            type: string
+      responses:
+        "200":
+          description: A successful response.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/v1DeleteSampleUserResponse"
+              examples:
+                default:
+                  value: {}
+        "500":
+          description: ""
+          content:
+            application/json:
+              schema: {}
+              examples:
+                default:
+                  value:
+                    code: internal
+                    message: エラーが発生しました。再試行しても解消しない場合は、「お問合せ」からご連絡ください。
+
+  /api/v1/sample-user/get:
+    post:
+      summary: サンプルユーザー取得API
+      description: サンプルユーザー取得API 概要
+      operationId: SampleService_GetSampleUser
+      tags:
+        - SampleService
+      security:
+        - bearer: []
+      parameters:
+        - name: sampleUserId
+          in: query
+          description: サンプルなので、UserIDはBodyに含める
+          schema:
+            type: string
+      responses:
+        "200":
+          description: A successful response.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/v1GetSampleUserResponse"
+              examples:
+                default:
+                  value: {}
+        "404":
+          description: ""
+          content:
+            application/json:
+              schema: {}
+              examples:
+                default:
+                  value:
+                    code: not_found
+                    message: データが見つかりません。
+        "500":
+          description: ""
+          content:
+            application/json:
+              schema: {}
+              examples:
+                default:
+                  value:
+                    code: internal
+                    message: エラーが発生しました。再試行しても解消しない場合は、「お問合せ」からご連絡ください。
+
+  /api/v1/sample-user/list:
+    post:
+      summary: サンプルユーザーリスト取得API
+      description: サンプルユーザーリスト取得API 概要
+      operationId: SampleService_ListSampleUser
+      tags:
+        - SampleService
+      security:
+        - bearer: []
+      parameters:
+        - name: page
+          in: query
+          schema:
+            type: integer
+            format: int32
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            format: int32
+      responses:
+        "200":
+          description: A successful response.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/v1ListSampleUserResponse"
+              examples:
+                default:
+                  value: {}
+        "500":
+          description: ""
+          content:
+            application/json:
+              schema: {}
+              examples:
+                default:
+                  value:
+                    code: internal
+                    message: エラーが発生しました。再試行しても解消しない場合は、「お問合せ」からご連絡ください。
+
+  /api/v1/sample-user/update:
+    post:
+      summary: サンプルユーザー更新API
+      description: サンプルユーザー更新API 概要
+      operationId: SampleService_UpdateSampleUser
+      tags:
+        - SampleService
+      security:
+        - bearer: []
+      parameters:
+        - name: sampleUserId
+          in: query
+          description: サンプルなので、UserIDはBodyに含める
+          schema:
+            type: string
+        - name: firstName
+          in: query
+          schema:
+            type: string
+        - name: lastName
+          in: query
+          schema:
+            type: string
+        - name: firstNameKana
+          in: query
+          schema:
+            type: string
+        - name: lastNameKana
+          in: query
+          schema:
+            type: string
+        - name: emailAddress
+          in: query
+          schema:
+            type: string
+        - name: postalCode
+          in: query
+          schema:
+            type: string
+        - name: prefecture
+          in: query
+          description: |
+            - PREFECTURE_UNSPECIFIED: 未指定
+            - PREFECTURE_HOKKAIDO: 北海道
+            - PREFECTURE_AOMORI: 青森県
+            - PREFECTURE_IWATE: 岩手県
+            - PREFECTURE_MIYAGI: 宮城県
+            - PREFECTURE_AKITA: 秋田県
+            - PREFECTURE_YAMAGATA: 山形県
+            - PREFECTURE_FUKUSHIMA: 福島県
+            - PREFECTURE_IBARAKI: 茨城県
+            - PREFECTURE_TOCHIGI: 栃木県
+            - PREFECTURE_GUNMA: 群馬県
+            - PREFECTURE_SAITAMA: 埼玉県
+            - PREFECTURE_CHIBA: 千葉県
+            - PREFECTURE_TOKYO: 東京都
+            - PREFECTURE_KANAGAWA: 神奈川県
+            - PREFECTURE_NIIGATA: 新潟県
+            - PREFECTURE_TOYAMA: 富山県
+            - PREFECTURE_ISHIKAWA: 石川県
+            - PREFECTURE_FUKUI: 福井県
+            - PREFECTURE_YAMANASHI: 山梨県
+            - PREFECTURE_NAGANO: 長野県
+            - PREFECTURE_GIFU: 岐阜県
+            - PREFECTURE_SHIZUOKA: 静岡県
+            - PREFECTURE_AICHI: 愛知県
+            - PREFECTURE_MIE: 三重県
+            - PREFECTURE_SHIGA: 滋賀県
+            - PREFECTURE_KYOTO: 京都府
+            - PREFECTURE_OSAKA: 大阪府
+            - PREFECTURE_HYOGO: 兵庫県
+            - PREFECTURE_NARA: 奈良県
+            - PREFECTURE_WAKAYAMA: 和歌山県
+            - PREFECTURE_TOTTORI: 鳥取県
+            - PREFECTURE_SHIMANE: 島根県
+            - PREFECTURE_OKAYAMA: 岡山県
+            - PREFECTURE_HIROSHIMA: 広島県
+            - PREFECTURE_YAMAGUCHI: 山口県
+            - PREFECTURE_TOKUSHIMA: 徳島県
+            - PREFECTURE_KAGAWA: 香川県
+            - PREFECTURE_EHIME: 愛媛県
+            - PREFECTURE_KOCHI: 高知県
+            - PREFECTURE_FUKUOKA: 福岡県
+            - PREFECTURE_SAGA: 佐賀県
+            - PREFECTURE_NAGASAKI: 長崎県
+            - PREFECTURE_KUMAMOTO: 熊本県
+            - PREFECTURE_OITA: 大分県
+            - PREFECTURE_MIYAZAKI: 宮崎県
+            - PREFECTURE_KAGOSHIMA: 鹿児島県
+            - PREFECTURE_OKINAWA: 沖縄
+          schema:
+            type: string
+            enum:
+              - PREFECTURE_UNSPECIFIED
+              - PREFECTURE_HOKKAIDO
+              - PREFECTURE_AOMORI
+              - PREFECTURE_IWATE
+              - PREFECTURE_MIYAGI
+              - PREFECTURE_AKITA
+              - PREFECTURE_YAMAGATA
+              - PREFECTURE_FUKUSHIMA
+              - PREFECTURE_IBARAKI
+              - PREFECTURE_TOCHIGI
+              - PREFECTURE_GUNMA
+              - PREFECTURE_SAITAMA
+              - PREFECTURE_CHIBA
+              - PREFECTURE_TOKYO
+              - PREFECTURE_KANAGAWA
+              - PREFECTURE_NIIGATA
+              - PREFECTURE_TOYAMA
+              - PREFECTURE_ISHIKAWA
+              - PREFECTURE_FUKUI
+              - PREFECTURE_YAMANASHI
+              - PREFECTURE_NAGANO
+              - PREFECTURE_GIFU
+              - PREFECTURE_SHIZUOKA
+              - PREFECTURE_AICHI
+              - PREFECTURE_MIE
+              - PREFECTURE_SHIGA
+              - PREFECTURE_KYOTO
+              - PREFECTURE_OSAKA
+              - PREFECTURE_HYOGO
+              - PREFECTURE_NARA
+              - PREFECTURE_WAKAYAMA
+              - PREFECTURE_TOTTORI
+              - PREFECTURE_SHIMANE
+              - PREFECTURE_OKAYAMA
+              - PREFECTURE_HIROSHIMA
+              - PREFECTURE_YAMAGUCHI
+              - PREFECTURE_TOKUSHIMA
+              - PREFECTURE_KAGAWA
+              - PREFECTURE_EHIME
+              - PREFECTURE_KOCHI
+              - PREFECTURE_FUKUOKA
+              - PREFECTURE_SAGA
+              - PREFECTURE_NAGASAKI
+              - PREFECTURE_KUMAMOTO
+              - PREFECTURE_OITA
+              - PREFECTURE_MIYAZAKI
+              - PREFECTURE_KAGOSHIMA
+              - PREFECTURE_OKINAWA
+            default: PREFECTURE_UNSPECIFIED
+        - name: city
+          in: query
+          schema:
+            type: string
+        - name: streetAndNumber
+          in: query
+          schema:
+            type: string
+        - name: buildingAndRoom
+          in: query
+          schema:
+            type: string
+      responses:
+        "200":
+          description: A successful response.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/v1UpdateSampleUserResponse"
+              examples:
+                default:
+                  value: {}
+        "500":
+          description: ""
+          content:
+            application/json:
+              schema: {}
+              examples:
+                default:
+                  value:
+                    code: internal
+                    message: エラーが発生しました。再試行しても解消しない場合は、「お問合せ」からご連絡ください。
+
+components:
+  schemas:
+    v1CreateSampleUserResponse:
+      type: object
+
+    v1DeleteSampleUserResponse:
+      type: object
+
+    v1GetSampleUserResponse:
+      type: object
+      properties:
+        sampleUserId:
+          type: string
+        firstName:
+          type: string
+        lastName:
+          type: string
+        firstNameKana:
+          type: string
+        lastNameKana:
+          type: string
+        emailAddress:
+          type: string
+        tel:
+          type: string
+        birthDate:
+          type: string
+          format: date-time
+        postalCode:
+          type: string
+        prefecture:
+          type: string
+        city:
+          type: string
+        streetAndNumber:
+          type: string
+        buildingAndRoom:
+          type: string
+
+    v1ListSampleUserRes:
+      type: object
+      title: APIによって使用したい値が異なるため、ListSampleUserResponse用のメッセージを定義
+      properties:
+        sampleUserId:
+          type: string
+        firstName:
+          type: string
+        lastName:
+          type: string
+        firstNameKana:
+          type: string
+        lastNameKana:
+          type: string
+        emailAddress:
+          type: string
+        tel:
+          type: string
+        birthDate:
+          type: string
+          format: date-time
+        postalCode:
+          type: string
+        prefecture:
+          type: string
+        city:
+          type: string
+        streetAndNumber:
+          type: string
+        buildingAndRoom:
+          type: string
+
+    v1ListSampleUserResponse:
+      type: object
+      properties:
+        sampleUsers:
+          type: array
+          items:
+            $ref: "#/components/schemas/v1ListSampleUserRes"
+
+    v1Prefecture:
+      type: string
+      enum:
+        - PREFECTURE_UNSPECIFIED
+        - PREFECTURE_HOKKAIDO
+        - PREFECTURE_AOMORI
+        - PREFECTURE_IWATE
+        - PREFECTURE_MIYAGI
+        - PREFECTURE_AKITA
+        - PREFECTURE_YAMAGATA
+        - PREFECTURE_FUKUSHIMA
+        - PREFECTURE_IBARAKI
+        - PREFECTURE_TOCHIGI
+        - PREFECTURE_GUNMA
+        - PREFECTURE_SAITAMA
+        - PREFECTURE_CHIBA
+        - PREFECTURE_TOKYO
+        - PREFECTURE_KANAGAWA
+        - PREFECTURE_NIIGATA
+        - PREFECTURE_TOYAMA
+        - PREFECTURE_ISHIKAWA
+        - PREFECTURE_FUKUI
+        - PREFECTURE_YAMANASHI
+        - PREFECTURE_NAGANO
+        - PREFECTURE_GIFU
+        - PREFECTURE_SHIZUOKA
+        - PREFECTURE_AICHI
+        - PREFECTURE_MIE
+        - PREFECTURE_SHIGA
+        - PREFECTURE_KYOTO
+        - PREFECTURE_OSAKA
+        - PREFECTURE_HYOGO
+        - PREFECTURE_NARA
+        - PREFECTURE_WAKAYAMA
+        - PREFECTURE_TOTTORI
+        - PREFECTURE_SHIMANE
+        - PREFECTURE_OKAYAMA
+        - PREFECTURE_HIROSHIMA
+        - PREFECTURE_YAMAGUCHI
+        - PREFECTURE_TOKUSHIMA
+        - PREFECTURE_KAGAWA
+        - PREFECTURE_EHIME
+        - PREFECTURE_KOCHI
+        - PREFECTURE_FUKUOKA
+        - PREFECTURE_SAGA
+        - PREFECTURE_NAGASAKI
+        - PREFECTURE_KUMAMOTO
+        - PREFECTURE_OITA
+        - PREFECTURE_MIYAZAKI
+        - PREFECTURE_KAGOSHIMA
+        - PREFECTURE_OKINAWA
+      default: PREFECTURE_UNSPECIFIED
+      description: |
+        - PREFECTURE_UNSPECIFIED: 未指定
+        - PREFECTURE_HOKKAIDO: 北海道
+        - PREFECTURE_AOMORI: 青森県
+        - PREFECTURE_IWATE: 岩手県
+        - PREFECTURE_MIYAGI: 宮城県
+        - PREFECTURE_AKITA: 秋田県
+        - PREFECTURE_YAMAGATA: 山形県
+        - PREFECTURE_FUKUSHIMA: 福島県
+        - PREFECTURE_IBARAKI: 茨城県
+        - PREFECTURE_TOCHIGI: 栃木県
+        - PREFECTURE_GUNMA: 群馬県
+        - PREFECTURE_SAITAMA: 埼玉県
+        - PREFECTURE_CHIBA: 千葉県
+        - PREFECTURE_TOKYO: 東京都
+        - PREFECTURE_KANAGAWA: 神奈川県
+        - PREFECTURE_NIIGATA: 新潟県
+        - PREFECTURE_TOYAMA: 富山県
+        - PREFECTURE_ISHIKAWA: 石川県
+        - PREFECTURE_FUKUI: 福井県
+        - PREFECTURE_YAMANASHI: 山梨県
+        - PREFECTURE_NAGANO: 長野県
+        - PREFECTURE_GIFU: 岐阜県
+        - PREFECTURE_SHIZUOKA: 静岡県
+        - PREFECTURE_AICHI: 愛知県
+        - PREFECTURE_MIE: 三重県
+        - PREFECTURE_SHIGA: 滋賀県
+        - PREFECTURE_KYOTO: 京都府
+        - PREFECTURE_OSAKA: 大阪府
+        - PREFECTURE_HYOGO: 兵庫県
+        - PREFECTURE_NARA: 奈良県
+        - PREFECTURE_WAKAYAMA: 和歌山県
+        - PREFECTURE_TOTTORI: 鳥取県
+        - PREFECTURE_SHIMANE: 島根県
+        - PREFECTURE_OKAYAMA: 岡山県
+        - PREFECTURE_HIROSHIMA: 広島県
+        - PREFECTURE_YAMAGUCHI: 山口県
+        - PREFECTURE_TOKUSHIMA: 徳島県
+        - PREFECTURE_KAGAWA: 香川県
+        - PREFECTURE_EHIME: 愛媛県
+        - PREFECTURE_KOCHI: 高知県
+        - PREFECTURE_FUKUOKA: 福岡県
+        - PREFECTURE_SAGA: 佐賀県
+        - PREFECTURE_NAGASAKI: 長崎県
+        - PREFECTURE_KUMAMOTO: 熊本県
+        - PREFECTURE_OITA: 大分県
+        - PREFECTURE_MIYAZAKI: 宮崎県
+        - PREFECTURE_KAGOSHIMA: 鹿児島県
+        - PREFECTURE_OKINAWA: 沖縄
+      title: 都道府県
+
+    v1UpdateSampleUserResponse:
+      type: object
+
+  securitySchemes:
+    bearer:
+      type: http
+      scheme: bearer
