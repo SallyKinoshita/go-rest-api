@@ -7,6 +7,7 @@ import (
 	"github.com/SallyKinoshita/go-rest-api/backend/internal/domain/repository"
 	"github.com/SallyKinoshita/go-rest-api/backend/pkg/ccontext"
 	"github.com/SallyKinoshita/go-rest-api/backend/pkg/cerror"
+	"github.com/SallyKinoshita/go-rest-api/backend/pkg/cuuid"
 	"github.com/labstack/echo/v4"
 	"github.com/uptrace/bun"
 )
@@ -39,27 +40,29 @@ func (c *ClientUser) CognitoAuth(ctx context.Context) echo.MiddlewareFunc {
 				return cerror.New("invalid auth header", cerror.DetailUnauthorized)
 			}
 
-			var checkTokenExpiresAt bool
-			if ec.Path() != sampleUserTokenRefreshPath {
-				checkTokenExpiresAt = true
-			}
+			// TODO: 認証方法に応じてUserIDを取得する
+			// var checkTokenExpiresAt bool
+			// if ec.Path() != sampleUserTokenRefreshPath {
+			// 	checkTokenExpiresAt = true
+			// }
 
-			ctx := ec.Request().Context()
+			// ctx := ec.Request().Context()
 
-			now, err := ccontext.GetNowTime(ctx)
-			if err != nil {
-				return err
-			}
+			// now, err := ccontext.GetNowTime(ctx)
+			// if err != nil {
+			// 	return err
+			// }
 
-			sub, err := c.clientUserAuthRepo.GetCognitoUserIDByIDTokenAndValidate(ctx, idToken, now, checkTokenExpiresAt)
-			if err != nil {
-				return err
-			}
+			// sub, err := c.clientUserAuthRepo.GetCognitoUserIDByIDTokenAndValidate(ctx, idToken, now, checkTokenExpiresAt)
+			// if err != nil {
+			// 	return err
+			// }
 
-			clientUserID, err := c.clientUserRepo.GetIDByCognitoUserID(ctx, c.db, sub)
-			if err != nil {
-				return err
-			}
+			// clientUserID, err := c.clientUserRepo.GetIDByCognitoUserID(ctx, c.db, sub)
+			// if err != nil {
+			// 	return err
+			// }
+			clientUserID, _ := cuuid.New() // TODO: 仮の値
 
 			ctx = ccontext.SetClientUserID(ctx, clientUserID)
 

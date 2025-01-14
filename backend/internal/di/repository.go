@@ -8,6 +8,8 @@ import (
 
 var repositorySet = wire.NewSet(
 	persistencerepository.NewSampleUser,
+	persistencerepository.NewClientUserAuth,
 
 	wire.Bind(new(repository.SampleUser), new(*persistencerepository.SampleUser)),
+	wire.Bind(new(repository.ClientUserAuth), new(*persistencerepository.ClientUserAuth)),
 )

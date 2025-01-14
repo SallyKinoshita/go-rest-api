@@ -49,10 +49,14 @@ func (s *SampleUser) Create(ctx context.Context, firstName, lastName, firstNameK
 		return err
 	}
 
-	return s.sampleUserRepo.Create(ctx, s.db, user)
+	return s.sampleUserRepo.Create(ctx, s.db, now, user)
 }
 
 func (s *SampleUser) Update(ctx context.Context, sampleUserID, firstName, lastName, firstNameKana, lastNameKana, emailAddress, postalCode string, prefecture model.Prefecture, city, streetAndNumber, buildingAndRoom string) error {
+	now, err := ccontext.GetNowTime(ctx)
+	if err != nil {
+		return err
+	}
 	uuid, err := cuuid.Convert(sampleUserID)
 	if err != nil {
 		return err
@@ -67,7 +71,7 @@ func (s *SampleUser) Update(ctx context.Context, sampleUserID, firstName, lastNa
 		return err
 	}
 
-	return s.sampleUserRepo.Update(ctx, s.db, user)
+	return s.sampleUserRepo.Update(ctx, s.db, now, user)
 }
 
 func (s *SampleUser) Get(ctx context.Context, sampleUserID cuuid.CUUID) (*model.SampleUser, error) {

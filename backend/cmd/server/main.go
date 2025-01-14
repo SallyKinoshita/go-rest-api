@@ -8,6 +8,7 @@ import (
 	"syscall"
 
 	"github.com/SallyKinoshita/go-rest-api/backend/internal/config"
+	"github.com/SallyKinoshita/go-rest-api/backend/internal/di"
 	"github.com/SallyKinoshita/go-rest-api/backend/internal/interfaces/router"
 	"github.com/SallyKinoshita/go-rest-api/backend/pkg/clog"
 )
@@ -19,6 +20,7 @@ func main() {
 	if err := run(ctx); err != nil {
 		// clog.Initがコケたらclogが使えないので、fmt.Printlnでエラーを出力
 		fmt.Println("server run error: ", err)
+		os.Exit(1)
 	}
 }
 

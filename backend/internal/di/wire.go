@@ -12,8 +12,6 @@ import (
 
 func New(ctx context.Context, cfg *config.Config, db *bun.DB) (DI, error) {
 	wire.Build(
-		wire.FieldsOf(new(*config.Config), "AWS", "Environment"),
-		providerSet,
 		repositorySet,
 		useCaseSet,
 		controllerSet,
